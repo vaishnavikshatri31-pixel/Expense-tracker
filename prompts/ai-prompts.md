@@ -15,8 +15,8 @@ AI helped generate:
 
 ### 2. Group Management Assistance Prompt
 
-I defined:
-- Many-to-many relationship between users and groups
+Defined:
+- Many to many relationship between users and groups
 - Add member by searching phone number
 - Enforce foreign key constraints
 
@@ -26,10 +26,10 @@ AI helped scaffold:
 
 ### 3. Expense Splitting Logic Assistance
 
-I specified:
+ Specified:
 - Equal split with remainder handling
-- Share-wise split with validation
-- No floating-point arithmetic
+- Share wise split with validation
+- No floating point arithmetic
 
 AI assisted in:
 - Structuring service layer
@@ -37,7 +37,7 @@ AI assisted in:
 
 ### 4. Settlement Algorithm Assistance
 
-I designed the greedy approach:
+ Designed the greedy approach:
 - Compute net balances
 - Separate debtors and creditors
 - Match highest amounts first
@@ -48,9 +48,9 @@ AI helped refine:
 
 ### 5. Money Handling Strategy Validation
 
-I requested validation of:
+ Requested validation of:
 - Using NUMERIC(12,2) in PostgreSQL
 - Mapping to decimal.Decimal
 - Avoiding float64 errors
 
-AI confirmed best practices and provided reference implementation.
+
