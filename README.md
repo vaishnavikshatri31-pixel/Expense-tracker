@@ -1,0 +1,75 @@
+*-# Expense Tracker & Bill Splitting API
+
+A high-performance REST API built in Go for tracking shared expenses and optimizing settlements (similar to Splitwise).
+
+## Features
+- **User Management**: Create and fetch user profiles by UUID or Phone Number.
+- **Group Management**: Organize users into groups (e.g., Roommates, Trips).
+- **Expense Splitting**:
+  - **Equal Split**: Automatically handles rounding remainders.
+  - **Share-wise Split**: Custom amounts per user.
+- **Settlement Optimization**: Greedy algorithm to minimize the total number of transactions needed to settle debts.
+- **Precision Money Handling**: Uses the `shopspring/decimal` library to prevent floating-point errors.
+
+## Tech Stack
+- **Go** (1.21+)
+- **Gin Gonic** (Web Framework)
+- **PostgreSQL** (Relational Database)
+- **Shopspring Decimal** (Financial precision)
+
+## Getting Started
+
+### 1. Database Setup
+Create a PostgreSQL database named `expense_tracker` and run the migration:
+```bash
+psql -U postgres -d expense_tracker -f migrations/schema.sql
+```
+
+### 2. Configuration
+Set the database URL in your environment:
+```bash
+export DATABASE_URL="postgres://user:pass@localhost:5432/expense_tracker?sslmode=disable"
+```
+
+### 3. Run the API
+```bash
+go run cmd/api/main.go
+```
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/users` | Create a new user profile |
+| GET | `/users/:id` | Fetch user profile by UUID |
+| POST | `/groups` | Create a new group |
+| POST | `/groups/:id/members` | Add member to group by phone number |
+| POST | `/expenses` | Add a new expense with splitting logic |
+| GET | `/groups/:id/settlements` | Calculate minimum transactions required |
+| POST | `/groups/:id/settle` | Reset balances after physical payment |
+
+## Settlement Optimization Example
+
+**Scenario:**
+- User A owes User B $100
+- User B owes User C $100
+
+**Standard Transactions:**
+1. A -> B ($100)
+2. B -> C ($100)
+
+**Optimized (Min Transactions):**
+1. A -> C ($100)
+(Reduced from 2 transactions to 1)
+
+## Architecture
+This project follows a layered architecture to ensure separation of concerns:
+- `models`: Data structures and DB entities.
+- `repository`: SQL queries and database logic.
+- `service`: Business rules and split logic.
+- `handlers`: HTTP request parsing and response formatting.
+- `algorithm`: Settlement minimization logic.
+
+## Documentation
+- [Design Document](docs/design.md)
+- [AI Assistance Log](prompts/ai-prompts.md)
