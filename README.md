@@ -1,5 +1,5 @@
 ## Expense Tracker & Bill Splitting API
-[GIT VIEW](https://github.com/vaishnavikshatri31-pixel/Expense-tracker)
+##[VIEW ON GIT](https://github.com/vaishnavikshatri31-pixel/Expense-tracker)
 
 A high-performance REST API built in Go for tracking shared expenses and optimizing settlements (similar to Splitwise).
 
