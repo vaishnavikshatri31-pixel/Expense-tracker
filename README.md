@@ -52,25 +52,17 @@ go run cmd/api/main.go
 
 Example:
 
-A owes 100 to B,
-B owes 100 to C
+A owes ₹100 to B
+B owes ₹100 to C
 
 Normal transactions:
-A → B (100),
-B → C (100)
+A → B (₹100),
+B → C (₹100)
 
 Optimized:
 A → C (100)
 
 Reduced from 2 transactions to 1.
-
-## Architecture
-This project follows a layered architecture to ensure separation of concerns:
-- models: Data structures and DB entities.
-- repository: SQL queries and database logic.
-- service: Business rules and split logic.
-- handlers: HTTP request parsing and response formatting.
-- algorithm: Settlement minimization logic.
 
 ## Documentation
 - [Design Document](docs/design.md)
