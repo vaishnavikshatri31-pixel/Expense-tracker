@@ -22,7 +22,7 @@ Database columns are defined as `NUMERIC(12,2)`.
 Key rules:
 - No `float64` for money.
 - Rounding to 2 decimal places using `DivRound`.
-- Remainder handling: In equal splits, any rounding differences (e.g., $10 / 3 = 3.333...$) are assigned to the first member of the group to ensure the total sum remains exact.
+- Remainder handling: In equal splits, any rounding differences (e.g., ₹10 / 3 = 3.333...₹) are assigned to the first member of the group to ensure the total sum remains exact.
 
 ## Settlement Algorithm: Greedy Match
 The goal is to minimize the total number of transactions.
