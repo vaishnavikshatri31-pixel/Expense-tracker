@@ -52,7 +52,7 @@ go run cmd/api/main.go
 
 Example:
 
-A owes ₹100 to B
+A owes ₹100 to B,
 B owes ₹100 to C
 
 Normal transactions:
