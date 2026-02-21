@@ -1,4 +1,4 @@
-# AI Assistance
+# AI Assistance 
 
 AI was used as a coding assistant to help generate boilerplate and validate architectural decisions. The core system design, database modeling, and settlement optimization logic were defined before prompting.
 
