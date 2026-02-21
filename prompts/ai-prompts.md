@@ -1,4 +1,4 @@
-# AI Assistance Log
+# AI Assistance
 
 AI was used as a coding assistant to help generate boilerplate and validate architectural decisions. The core system design, database modeling, and settlement optimization logic were defined before prompting.
 
@@ -6,7 +6,7 @@ AI was used as a coding assistant to help generate boilerplate and validate arch
 
 I provided the following structured requirement:
 
-> Create a Go-based REST endpoint for managing users with UUID as primary key and unique phone number constraint. Ensure PostgreSQL schema includes unique index and proper error handling for duplicates.
+ Create a Go-based REST endpoint for managing users with UUID as primary key and unique phone number constraint. Ensure PostgreSQL schema includes unique index and proper error handling for duplicates.
 
 AI helped generate:
 - Handler skeleton
