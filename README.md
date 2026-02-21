@@ -67,4 +67,4 @@ Reduced from 2 transactions to 1.
 
 ## Documentation
 - [Design Document](docs/design.md)
-- [AI Assistance Log](prompts/ai-prompts.md)
+- [AI Assistance(Prompts)](prompts/ai-prompts.md)
