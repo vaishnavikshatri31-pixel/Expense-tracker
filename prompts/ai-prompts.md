@@ -1,56 +1,189 @@
-# AI Assistance 
+## Prompts
+# Main Project Prompt
+I am building a production-style REST API in Go (Golang) for an Expense Tracker with Bill Splitting functionality similar to Splitwise.
 
-AI was used as a coding assistant to help generate boilerplate and validate architectural decisions. The core system design, database modeling, and settlement optimization logic were defined before prompting.
+Requirements:
 
-### 1. User Module Assistance Prompt
+1. Features:
+- Create user profile (name, phone number as unique identifier)
+- Create group (trip group, roommates group etc.)
+- Add members to group using phone number
+- Add expense to group
+- Split expense:
+    a) Equally among members
+    b) Share-wise (custom amount per user)
+- Calculate net balances
+- Implement settlement algorithm that minimizes number of transactions
+- Update database after settlement
 
-I provided the following structured requirement:
+2. Technical Requirements:
+- Use Go programming language
+- Use Gin framework
+- Use PostgreSQL
+- Use proper layered architecture:
+    - models
+    - handlers
+    - services
+    - repository
+    - algorithms
+- Use proper decimal/money handling (avoid float)
+- Store money in smallest currency unit (paise/cents) OR use decimal library
+- Implement greedy settlement algorithm
+- Provide REST endpoints with JSON input/output
 
- Create a Go-based REST endpoint for managing users with UUID as primary key and unique phone number constraint. Ensure PostgreSQL schema includes unique index and proper error handling for duplicates.
+3. Deliverables:
+- Complete database schema
+- Settlement algorithm implementation
+- Example scenarios
+- Clear comments explaining logic
+- Clean project structure
 
-AI helped generate:
-- Handler skeleton
-- Repository pattern template
-- Validation logic
+Important:
+- Focus on correctness of money calculations
+- Avoid floating point precision errors
+- Write production-quality structured code
+- Include edge case handling
 
-### 2. Group Management Assistance Prompt
+Generate full backend code with explanation.
 
-Defined:
-- Many to many relationship between users and groups
-- Add member by searching phone number
-- Enforce foreign key constraints
+# PROMPT FOR USER PROFILE FEATURE
+Generate Go REST API code using Gin to create and fetch user profiles.
 
-AI helped scaffold:
-- SQL schema draft
-- Repository function template
+User fields:
+- ID (UUID)
+- Name
+- Phone number (unique)
+- CreatedAt
 
-### 3. Expense Splitting Logic Assistance
+Implement:
+- POST /users
+- GET /users/:id
 
- Specified:
-- Equal split with remainder handling
-- Share wise split with validation
-- No floating point arithmetic
+Ensure:
+- Phone number uniqueness validation
+- Proper error handling
+- Database schema for PostgreSQL
+- Layered architecture
 
-AI assisted in:
-- Structuring service layer
-- Decimal handling integration
+#PROMPT FOR GROUP CREATION + ADD BY PHONE NUMBER
+Generate Go REST API code to:
 
-### 4. Settlement Algorithm Assistance
+1. Create group
+2. Add member to group using phone number
 
- Designed the greedy approach:
-- Compute net balances
-- Separate debtors and creditors
-- Match highest amounts first
+Requirements:
+- Group has:
+    ID
+    Name
+    CreatedBy
+- Many-to-many relationship between users and groups
+- When adding member:
+    - Search user by phone number
+    - Add to group if exists
+    - Return error if phone not registered
 
-AI helped refine:
-- Edge case handling
-- Clean implementation formatting
+Provide:
+- Database schema
+- Repository methods
+- Service layer logic
+- API endpoints:
+    POST /groups
+    POST /groups/:id/members
 
-### 5. Money Handling Strategy Validation
+ # PROMPT FOR SPLITTING EXPENSE (EQUAL + SHAREWISE)
+ 
+Generate Go service logic to add expense in a group.
 
- Requested validation of:
-- Using NUMERIC(12,2) in PostgreSQL
-- Mapping to decimal.Decimal
-- Avoiding float64 errors
+Expense fields:
+- ID
+- GroupID
+- PaidBy
+- TotalAmount (use decimal or smallest unit)
+- SplitType (EQUAL or SHARE)
+- CreatedAt
+
+Implement:
+
+1. Equal split:
+   Divide total amount equally among group members
+
+2. Share-wise split:
+   Accept JSON input like:
+   [
+     {user_id: X, amount: 500},
+     {user_id: Y, amount: 300}
+   ]
+
+Validate:
+- Sum of shares must equal total amount
+- No floating point errors
+
+Update balances table accordingly.
+
+Provide full implementation with validation.
+
+# PROMPT FOR SETTLEMENT ALGORITHM
+Implement a settlement algorithm in Go that minimizes number of transactions between users in a group.
+
+Steps:
+1. Compute net balance for each user
+   - Positive means user should receive
+   - Negative means user owes
+
+2. Separate into:
+   - Creditors list
+   - Debtors list
+
+3. Apply greedy matching:
+   - Match highest debtor with highest creditor
+   - Transfer minimum amount
+   - Update balances
+   - Repeat until settled
+
+4. Return optimized list of transactions.
+
+Ensure:
+- Time complexity explanation
+- Proper money handling
+- Clear comments explaining algorithm
+
+# PROMPT FOR MONEY HANDLING STRATEGY
+Explain and implement best practice for handling money in Go backend systems.
+
+Requirements:
+- Avoid float64
+- Either:
+   a) Use int64 and store money in smallest currency unit (paise)
+   OR
+   b) Use decimal library
+
+Explain:
+- Why float causes precision issues
+- How rounding is handled
+- How database schema should define money column (NUMERIC(12,2))
+
+Provide example calculations.
+
+# PROMPT FOR DATABASE SCHEMA
+Design PostgreSQL schema for Expense Tracker API with:
+
+Tables:
+- users
+- groups
+- group_members
+- expenses
+- expense_splits
+- balances
+
+Use:
+- UUID primary keys
+- Foreign keys
+- Proper decimal types (NUMERIC)
+- Unique constraint on phone number
+- Indexes for performance
+
+Provide CREATE TABLE statements.
+
+
 
 
