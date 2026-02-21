@@ -1,4 +1,4 @@
-*-# Expense Tracker & Bill Splitting API
+## Expense Tracker & Bill Splitting API
 
 A high-performance REST API built in Go for tracking shared expenses and optimizing settlements (similar to Splitwise).
 
@@ -50,25 +50,27 @@ go run cmd/api/main.go
 
 ## Settlement Optimization Example
 
-**Scenario:**
-- User A owes User B $100
-- User B owes User C $100
+Example:
 
-**Standard Transactions:**
-1. A -> B ($100)
-2. B -> C ($100)
+A owes 100 to B
+B owes 100 to C
 
-**Optimized (Min Transactions):**
-1. A -> C ($100)
-(Reduced from 2 transactions to 1)
+Normal transactions:
+A → B (100)
+B → C (100)
+
+Optimized:
+A → C (100)
+
+Reduced from 2 transactions to 1.
 
 ## Architecture
 This project follows a layered architecture to ensure separation of concerns:
-- `models`: Data structures and DB entities.
-- `repository`: SQL queries and database logic.
-- `service`: Business rules and split logic.
-- `handlers`: HTTP request parsing and response formatting.
-- `algorithm`: Settlement minimization logic.
+- models: Data structures and DB entities.
+- repository: SQL queries and database logic.
+- service: Business rules and split logic.
+- handlers: HTTP request parsing and response formatting.
+- algorithm: Settlement minimization logic.
 
 ## Documentation
 - [Design Document](docs/design.md)
