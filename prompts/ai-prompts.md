@@ -65,7 +65,7 @@ Ensure:
 - Database schema for PostgreSQL
 - Layered architecture
 
-#PROMPT FOR GROUP CREATION + ADD BY PHONE NUMBER
+# PROMPT FOR GROUP CREATION + ADD BY PHONE NUMBER
 Generate Go REST API code to:
 
 1. Create group
